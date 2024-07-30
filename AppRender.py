@@ -12,7 +12,7 @@ class MQ135Data(BaseModel):
 # Lista para almacenar los datos temporales (simulando una base de datos en memoria)
 mq135_data_storage = []
 
-APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHlrp-TgQttqGAYhwx6CIho7sDFnodmedw7V7e1DXWkqyOJlrOPg2yWwVMvCfmjmq5VQ/exec"
+APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCB-sIR9xnUqNX213r-8Y2MSkiC9qGdr-L-nrvJn6gSyIjFs2pCn_TCZT-RzomU7yZ_A/exec"
 
 # Endpoint para recibir datos del sensor MQ135
 @app.post("/sensor/mq135/data/", response_model=MQ135Data)
