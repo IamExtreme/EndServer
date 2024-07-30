@@ -1,4 +1,4 @@
-import requests
+import requests  # Asegúrate de que esta línea esté presente
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
