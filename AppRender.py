@@ -1,12 +1,8 @@
-import requests  # Asegúrate de que esta línea esté presente
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
 
 app = FastAPI()
-
-# URL de tu Google Apps Script
-APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHlrp-TgQttqGAYhwx6CIho7sDFnodmedw7V7e1DXWkqyOJlrOPg2yWwVMvCfmjmq5VQ/exec'
 
 # Modelo de datos para la lectura del sensor MQ135
 class MQ135Data(BaseModel):
@@ -21,21 +17,9 @@ mq135_data_storage = []
 def receive_mq135_data(data: MQ135Data):
     # Almacenar los datos recibidos en la lista
     mq135_data_storage.append(data)
-    
-    # Crear el payload para Google Apps Script
-    payload = {
-        "sensor_id": data.sensor_id,
-        "co2_ppm": data.co2_ppm
-    }
-    
-    # Enviar los datos a Google Apps Script
-    try:
-        response = requests.post(APPS_SCRIPT_URL, json=payload)
-        response.raise_for_status()  # Lanza una excepción si la solicitud falló
-        print('Datos enviados correctamente')
-    except requests.exceptions.RequestException as e:
-        print(f'Error al enviar datos: {e}')
-    
+    print(f"Datos recibidos del sensor MQ135 {data.sensor_id}:")
+    print(f"Concentración de CO2: {data.co2_ppm} ppm")
+
     return data
 
 # Endpoint para obtener todos los datos almacenados del sensor MQ135
