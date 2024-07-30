@@ -31,3 +31,7 @@ def get_all_mq135_data():
 @app.get("/")
 def read_root():
     return {"message": "Servidor FastAPI funcionando correctamente"}
+
+@app.post("/")
+def post_root(data: dict):
+    return {"received": data}
