@@ -1,8 +1,1 @@
-{
-	"folders": [
-		{
-			"path": "../Vercel"
-		}
-	],
-	"settings": {}
-}
+web: uvicorn app.main:AppRender --host 0.0.0.0 --port $PORT
