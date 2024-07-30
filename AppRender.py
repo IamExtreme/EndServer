@@ -12,6 +12,8 @@ class MQ135Data(BaseModel):
 # Lista para almacenar los datos temporales (simulando una base de datos en memoria)
 mq135_data_storage = []
 
+APPS_SCRIPT_URL = https://script.google.com/macros/s/AKfycbzY1ovCcsSrcdLaw1ti5y2p1CYAL3dZpfkdcffa-qETOlIBoH25NAEyUHMiEvSZeuZgjg/exec
+
 # Endpoint para recibir datos del sensor MQ135
 @app.post("/sensor/mq135/data/", response_model=MQ135Data)
 def receive_mq135_data(data: MQ135Data):
@@ -19,6 +21,10 @@ def receive_mq135_data(data: MQ135Data):
     mq135_data_storage.append(data)
     print(f"Datos recibidos del sensor MQ135 {data.sensor_id}:")
     print(f"Concentración de CO2: {data.co2_ppm} ppm")
+
+     # Enviar los datos a Google Sheets
+    payload = {"sensor_id": data.sensor_id, "co2_ppm": data.co2_ppm}
+    requests.post(APPS_SCRIPT_URL, json=payload)
 
     return data
 
